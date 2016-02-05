@@ -2,11 +2,12 @@
 //  AppDelegate.swift
 //  Weather
 //
-//  Created by R. Tony Goold on 2015-11-02.
+//  Created by Nisal Perera on 2015-11-02.
 //  Copyright © 2015 BrainStation. All rights reserved.
 //
 
 import UIKit
+import RealmSwift 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        return true
+       
+        
+        // For testing purposes: Delete the database on every launch
+        do {
+            let fileManager = NSFileManager.defaultManager()
+            let databasePath = Realm.Configuration.defaultConfiguration.path!
+            // Ignore errors if the database doesn't exist
+            try fileManager.removeItemAtPath(databasePath)
+        } catch {}
+        
+         return true
     }
 
     func applicationWillResignActive(application: UIApplication) {
